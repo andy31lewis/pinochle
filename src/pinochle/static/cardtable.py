@@ -382,7 +382,7 @@ def display_player_meld(meld_data: str):
     except Exception as e:  # pylint: disable=invalid-name,broad-except
         mylog.warning("display_player_meld: Caught exception: %r", e)
         return
-    InfoDialog(  # pylint: disable=assignment-from-no-return
+    dialog = InfoDialog(  # pylint: disable=assignment-from-no-return
         "Meld Cards",
         html.P(f"{player_name}'s meld cards are:") + d_canvas,
         left=25,
@@ -394,11 +394,7 @@ def display_player_meld(meld_data: str):
         document.getElementsByClassName("brython-dialog-main"),
     )
     # Add an ID attribute so we can find it later if needed.
-    for item in document.getElementsByClassName("brython-dialog-main"):
-        mylog.warning("display_player_meld: Item: %r", item)
-        if not item.id:
-            # Assume this is the one we just created.
-            item.id = f"dialog_{player_id}"
+    dialog.id = f"dialog_{player_id}"
 
     d_canvas.fitContents()
 
